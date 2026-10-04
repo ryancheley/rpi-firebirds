@@ -3,7 +3,7 @@ name = "rpi-cvfirebirds"
 version = "0.1.0"
 description = "Scrolls today's Coachella Valley Firebirds (AHL) game times across a Raspberry Pi Sense HAT."
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.13"
 dependencies = [
     "httpx2>=2.13.1",
     "sense-hat ; sys_platform == 'linux'",
