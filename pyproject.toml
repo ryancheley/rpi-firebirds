@@ -1,0 +1,7 @@
+[project]
+name = "rpi-cvfirebirds"
+version = "0.1.0"
+description = "Prints the start time of any Coachella Valley Firebirds (AHL) game scheduled for today."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
