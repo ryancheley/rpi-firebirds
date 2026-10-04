@@ -1,7 +1,10 @@
 [project]
 name = "rpi-cvfirebirds"
 version = "0.1.0"
-description = "Prints the start time of any Coachella Valley Firebirds (AHL) game scheduled for today."
+description = "Scrolls today's Coachella Valley Firebirds (AHL) game times across a Raspberry Pi Sense HAT."
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "httpx2>=2.13.1",
+    "sense-hat ; sys_platform == 'linux'",
+]

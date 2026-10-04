@@ -1,12 +1,5 @@
-# /// script
-# requires-python = ">=3.14"
-# dependencies = [
-#     "httpx2>=2.13.1",
-#     "sense-hat ; sys_platform == 'linux'",
-# ]
-# ///
-
 from datetime import date, datetime
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import httpx2
@@ -18,7 +11,7 @@ TEAM_ID = 445  # Coachella Valley Firebirds
 _http_client = httpx2.Client(timeout=30.0)
 
 
-def get_todays_games() -> list[int]:
+def get_todays_games() -> list[Any]:
     todays_date = date.today().strftime("%Y-%m-%d")
     url = f"https://ahl.ryancheley.com/my_database/scheduled_games.json?_sort=game_id&game_date__exact={todays_date}&_labels=on"
     todays_games = httpx2.get(url).json().get("rows", [])
