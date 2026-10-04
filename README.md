@@ -6,13 +6,21 @@ Scrolls the start time of any Coachella Valley Firebirds (AHL) game scheduled fo
 
 - A Raspberry Pi with a Sense HAT attached. The `sense-hat` dependency installs only on Linux; running elsewhere will fail at `SenseHat()`.
 
+## Raspberry Pi setup
+
+`RTIMU` (the Sense HAT's IMU library) is not on PyPI — it only ships as a Raspberry Pi OS apt package. The virtualenv therefore has to see system site-packages:
+
+```bash
+sudo apt install sense-hat          # installs RTIMULib + RTIMU bindings
+uv venv --system-site-packages      # venv that can see apt's RTIMU
+uv sync                             # install httpx2 + sense-hat
+```
+
 ## Run
 
 ```bash
 uv run program.py
 ```
-
-`program.py` is a [PEP 723](https://peps.python.org/pep-0723/) script — `uv` reads its inline dependencies, no install step needed.
 
 For each of today's games involving the Firebirds (team ID 445), it scrolls:
 
