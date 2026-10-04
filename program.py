@@ -2,6 +2,7 @@
 # requires-python = ">=3.14"
 # dependencies = [
 #     "httpx2>=2.13.1",
+#     "sense-hat ; sys_platform == 'linux'",
 # ]
 # ///
 
@@ -9,6 +10,7 @@ from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
 import httpx2
+from sense_hat import SenseHat  # ty: ignore[unresolved-import]  # Pi-only dep
 
 TEAM_ID = 445  # Coachella Valley Firebirds
 
@@ -56,6 +58,7 @@ def _get_game_meta_data(game_id: int, item: str):
 
 if __name__ == "__main__":
     game_data = get_todays_games()
+    sense = SenseHat()
     for game in game_data:
         game_id = game.get("game_id")
         home_team_id = game.get("home_team_id").get("value")
@@ -73,4 +76,4 @@ if __name__ == "__main__":
             )
             aware_game_date_display = aware_game_date.strftime("%I:%M %p").lstrip("0")
             message = f"The {visiting_team_name} will be playing the {home_team_name} at {aware_game_date_display}"
-            print(message)
+            sense.show_message(message, scroll_speed=0.05)
