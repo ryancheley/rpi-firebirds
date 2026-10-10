@@ -69,4 +69,9 @@ if __name__ == "__main__":
             )
             aware_game_date_display = aware_game_date.strftime("%I:%M %p").lstrip("0")
             message = f"The {visiting_team_name} will be playing the {home_team_name} at {aware_game_date_display}"
-            sense.show_message(message, scroll_speed=0.05)
+            time_to_game = aware_game_date - datetime.now().astimezone()
+            if (
+                time_to_game.total_seconds() >= 0
+                and time_to_game.total_seconds() <= 60 * 10
+            ):
+                sense.show_message(message, scroll_speed=0.05)
