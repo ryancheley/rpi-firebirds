@@ -1,4 +1,6 @@
+import subprocess
 from datetime import date, datetime
+from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
@@ -6,6 +8,8 @@ import httpx2
 from sense_hat import SenseHat  # ty: ignore[unresolved-import]  # Pi-only dep
 
 TEAM_ID = 445  # Coachella Valley Firebirds
+SOUND_FILE = Path(__file__).parent / "speech.wav"
+SOUND_MINUTES = (1, 5)  # minutes before game time to play the sound
 
 # Persistent httpx client for connection pooling and reuse
 _http_client = httpx2.Client(timeout=30.0)
@@ -75,3 +79,6 @@ if __name__ == "__main__":
                 and time_to_game.total_seconds() <= 60 * 10
             ):
                 sense.show_message(message, scroll_speed=0.05)
+                # ponytail: assumes cron runs this once a minute, so each minute plays once
+                if int(time_to_game.total_seconds() // 60) in SOUND_MINUTES:
+                    subprocess.run(["mpv", str(SOUND_FILE)], check=False)
