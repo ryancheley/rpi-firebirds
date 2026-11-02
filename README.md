@@ -11,7 +11,7 @@ Scrolls the start time of any Coachella Valley Firebirds (AHL) game scheduled fo
 `RTIMU` (the Sense HAT's IMU library) is not on PyPI — it only ships as a Raspberry Pi OS apt package. The virtualenv therefore has to see system site-packages:
 
 ```bash
-sudo apt install sense-hat          # installs RTIMULib + RTIMU bindings
+sudo apt install sense-hat mpv      # RTIMULib + RTIMU bindings; mpv plays speech.wav
 uv venv --system-site-packages      # venv that can see apt's RTIMU
 uv sync                             # install httpx2 + sense-hat
 ```
@@ -27,6 +27,8 @@ For each of today's games involving the Firebirds (team ID 445), it scrolls:
 ```
 The <visitor> will be playing the <home team> at <local start time>
 ```
+
+It also plays `speech.wav` (via `mpv`) 5 minutes and 1 minute before game time. Run it from cron once a minute.
 
 Times are converted from the game's timezone to the Pi's local timezone.
 
